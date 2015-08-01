@@ -50,7 +50,286 @@ namespace eduRobot
         private int level = 1;
         private string playerName;
         #endregion
-        
+
+        private void mGame1_Click(object sender, EventArgs e)
+        {
+            int i = 1;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame1.Image = null;
+            else
+                mGame1.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame2_Click(object sender, EventArgs e)
+        {
+            int i = 2;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame2.Image = null;
+            else
+                mGame2.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame3_Click(object sender, EventArgs e)
+        {
+            int i = 3;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame3.Image = null;
+            else
+                mGame3.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame4_Click(object sender, EventArgs e)
+        {
+            int i = 4;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame4.Image = null;
+            else
+                mGame4.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame5_Click(object sender, EventArgs e)
+        {
+            int i = 5;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame5.Image = null;
+            else
+                mGame5.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame6_Click(object sender, EventArgs e)
+        {
+            int i = 6;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame6.Image = null;
+            else
+                mGame6.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame7_Click(object sender, EventArgs e)
+        {
+            int i = 7;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame7.Image = null;
+            else
+                mGame7.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame8_Click(object sender, EventArgs e)
+        {
+            int i = 8;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame8.Image = null;
+            else
+                mGame8.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame9_Click(object sender, EventArgs e)
+        {
+            int i = 9;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame9.Image = null;
+            else
+                mGame9.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame10_Click(object sender, EventArgs e)
+        {
+            int i = 10;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame10.Image = null;
+            else
+                mGame10.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame11_Click(object sender, EventArgs e)
+        {
+            int i = 11;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame11.Image = null;
+            else
+                mGame11.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void mGame12_Click(object sender, EventArgs e)
+        {
+            int i = 12;
+            arrCmdOfMain[i] = (arrCmdOfMain[i] + 1) % 7;
+            if (arrCmdOfMain[i] == 0)
+                mGame12.Image = null;
+            else
+                mGame12.Image = arrImage.Images[arrCmdOfMain[i]];
+        }
+
+        private void f1Game1_Click(object sender, EventArgs e)
+        {
+            int i = 1;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game1.Image = null;
+            else
+                f1Game1.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game2_Click(object sender, EventArgs e)
+        {
+            int i = 2;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game2.Image = null;
+            else
+                f1Game2.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game3_Click(object sender, EventArgs e)
+        {
+            int i = 3;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game3.Image = null;
+            else
+                f1Game3.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game4_Click(object sender, EventArgs e)
+        {
+            int i = 4;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game4.Image = null;
+            else
+                f1Game4.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game5_Click(object sender, EventArgs e)
+        {
+            int i = 5;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game5.Image = null;
+            else
+                f1Game5.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game6_Click(object sender, EventArgs e)
+        {
+            int i = 6;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game6.Image = null;
+            else
+                f1Game6.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game7_Click(object sender, EventArgs e)
+        {
+            int i = 7;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game7.Image = null;
+            else
+                f1Game7.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f1Game8_Click(object sender, EventArgs e)
+        {
+            int i = 8;
+            arrCmdOfF1[i] = (arrCmdOfF1[i] + 1) % 7;
+            if (arrCmdOfF1[i] == 0)
+                f1Game8.Image = null;
+            else
+                f1Game8.Image = arrImage.Images[arrCmdOfF1[i]];
+        }
+
+        private void f2Game1_Click(object sender, EventArgs e)
+        {
+            int i = 1;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game1.Image = null;
+            else
+                f2Game1.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game2_Click(object sender, EventArgs e)
+        {
+            int i = 2;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game2.Image = null;
+            else
+                f2Game2.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game3_Click(object sender, EventArgs e)
+        {
+            int i = 3;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game3.Image = null;
+            else
+                f2Game3.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game4_Click(object sender, EventArgs e)
+        {
+            int i = 4;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game4.Image = null;
+            else
+                f2Game4.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game5_Click(object sender, EventArgs e)
+        {
+            int i = 5;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game5.Image = null;
+            else
+                f2Game5.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game6_Click(object sender, EventArgs e)
+        {
+            int i = 6;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game6.Image = null;
+            else
+                f2Game6.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game7_Click(object sender, EventArgs e)
+        {
+            int i = 7;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game7.Image = null;
+            else
+                f2Game7.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
+
+        private void f2Game8_Click(object sender, EventArgs e)
+        {
+            int i = 8;
+            arrCmdOfF2[i] = (arrCmdOfF2[i] + 1) % 7;
+            if (arrCmdOfF2[i] == 0)
+                f2Game8.Image = null;
+            else
+                f2Game8.Image = arrImage.Images[arrCmdOfF2[i]];
+        }
         public frmMain()
         {
             InitializeComponent();

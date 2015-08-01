@@ -480,6 +480,7 @@
             this.f2Game8.Size = new System.Drawing.Size(43, 42);
             this.f2Game8.TabIndex = 191;
             this.f2Game8.TabStop = false;
+            this.f2Game8.Click += new System.EventHandler(this.f2Game8_Click);
             // 
             // f2Game7
             // 
@@ -490,6 +491,7 @@
             this.f2Game7.Size = new System.Drawing.Size(43, 42);
             this.f2Game7.TabIndex = 190;
             this.f2Game7.TabStop = false;
+            this.f2Game7.Click += new System.EventHandler(this.f2Game7_Click);
             // 
             // f2Game6
             // 
@@ -500,6 +502,7 @@
             this.f2Game6.Size = new System.Drawing.Size(43, 42);
             this.f2Game6.TabIndex = 189;
             this.f2Game6.TabStop = false;
+            this.f2Game6.Click += new System.EventHandler(this.f2Game6_Click);
             // 
             // f2Game5
             // 
@@ -510,6 +513,7 @@
             this.f2Game5.Size = new System.Drawing.Size(43, 42);
             this.f2Game5.TabIndex = 188;
             this.f2Game5.TabStop = false;
+            this.f2Game5.Click += new System.EventHandler(this.f2Game5_Click);
             // 
             // f2Game4
             // 
@@ -520,6 +524,7 @@
             this.f2Game4.Size = new System.Drawing.Size(43, 42);
             this.f2Game4.TabIndex = 187;
             this.f2Game4.TabStop = false;
+            this.f2Game4.Click += new System.EventHandler(this.f2Game4_Click);
             // 
             // f2Game3
             // 
@@ -530,6 +535,7 @@
             this.f2Game3.Size = new System.Drawing.Size(43, 42);
             this.f2Game3.TabIndex = 186;
             this.f2Game3.TabStop = false;
+            this.f2Game3.Click += new System.EventHandler(this.f2Game3_Click);
             // 
             // f2Game2
             // 
@@ -540,6 +546,7 @@
             this.f2Game2.Size = new System.Drawing.Size(43, 42);
             this.f2Game2.TabIndex = 185;
             this.f2Game2.TabStop = false;
+            this.f2Game2.Click += new System.EventHandler(this.f2Game2_Click);
             // 
             // f2Game1
             // 
@@ -550,6 +557,7 @@
             this.f2Game1.Size = new System.Drawing.Size(43, 42);
             this.f2Game1.TabIndex = 184;
             this.f2Game1.TabStop = false;
+            this.f2Game1.Click += new System.EventHandler(this.f2Game1_Click);
             // 
             // f1Game8
             // 
@@ -560,6 +568,7 @@
             this.f1Game8.Size = new System.Drawing.Size(43, 42);
             this.f1Game8.TabIndex = 183;
             this.f1Game8.TabStop = false;
+            this.f1Game8.Click += new System.EventHandler(this.f1Game8_Click);
             // 
             // f1Game7
             // 
@@ -570,6 +579,7 @@
             this.f1Game7.Size = new System.Drawing.Size(43, 42);
             this.f1Game7.TabIndex = 182;
             this.f1Game7.TabStop = false;
+            this.f1Game7.Click += new System.EventHandler(this.f1Game7_Click);
             // 
             // f1Game6
             // 
@@ -580,6 +590,7 @@
             this.f1Game6.Size = new System.Drawing.Size(43, 42);
             this.f1Game6.TabIndex = 181;
             this.f1Game6.TabStop = false;
+            this.f1Game6.Click += new System.EventHandler(this.f1Game6_Click);
             // 
             // f1Game5
             // 
@@ -590,6 +601,7 @@
             this.f1Game5.Size = new System.Drawing.Size(43, 42);
             this.f1Game5.TabIndex = 180;
             this.f1Game5.TabStop = false;
+            this.f1Game5.Click += new System.EventHandler(this.f1Game5_Click);
             // 
             // f1Game4
             // 
@@ -600,6 +612,7 @@
             this.f1Game4.Size = new System.Drawing.Size(43, 42);
             this.f1Game4.TabIndex = 179;
             this.f1Game4.TabStop = false;
+            this.f1Game4.Click += new System.EventHandler(this.f1Game4_Click);
             // 
             // f1Game3
             // 
@@ -610,6 +623,7 @@
             this.f1Game3.Size = new System.Drawing.Size(43, 42);
             this.f1Game3.TabIndex = 178;
             this.f1Game3.TabStop = false;
+            this.f1Game3.Click += new System.EventHandler(this.f1Game3_Click);
             // 
             // f1Game2
             // 
@@ -620,6 +634,7 @@
             this.f1Game2.Size = new System.Drawing.Size(43, 42);
             this.f1Game2.TabIndex = 177;
             this.f1Game2.TabStop = false;
+            this.f1Game2.Click += new System.EventHandler(this.f1Game2_Click);
             // 
             // f1Game1
             // 
@@ -630,6 +645,7 @@
             this.f1Game1.Size = new System.Drawing.Size(43, 42);
             this.f1Game1.TabIndex = 176;
             this.f1Game1.TabStop = false;
+            this.f1Game1.Click += new System.EventHandler(this.f1Game1_Click);
             // 
             // mGame12
             // 
@@ -639,7 +655,8 @@
             this.mGame12.Name = "mGame12";
             this.mGame12.Size = new System.Drawing.Size(43, 42);
             this.mGame12.TabIndex = 175;
-            this.mGame12.TabStop = false;          
+            this.mGame12.TabStop = false;
+            this.mGame12.Click += new System.EventHandler(this.mGame12_Click);
             // 
             // mGame11
             // 
@@ -650,6 +667,7 @@
             this.mGame11.Size = new System.Drawing.Size(43, 42);
             this.mGame11.TabIndex = 174;
             this.mGame11.TabStop = false;
+            this.mGame11.Click += new System.EventHandler(this.mGame11_Click);
             // 
             // mGame10
             // 
@@ -660,6 +678,7 @@
             this.mGame10.Size = new System.Drawing.Size(43, 42);
             this.mGame10.TabIndex = 173;
             this.mGame10.TabStop = false;
+            this.mGame10.Click += new System.EventHandler(this.mGame10_Click);
             // 
             // mGame9
             // 
@@ -670,6 +689,7 @@
             this.mGame9.Size = new System.Drawing.Size(43, 42);
             this.mGame9.TabIndex = 172;
             this.mGame9.TabStop = false;
+            this.mGame9.Click += new System.EventHandler(this.mGame9_Click);
             // 
             // mGame8
             // 
@@ -680,6 +700,7 @@
             this.mGame8.Size = new System.Drawing.Size(43, 42);
             this.mGame8.TabIndex = 171;
             this.mGame8.TabStop = false;
+            this.mGame8.Click += new System.EventHandler(this.mGame8_Click);
             // 
             // mGame7
             // 
@@ -690,6 +711,7 @@
             this.mGame7.Size = new System.Drawing.Size(43, 42);
             this.mGame7.TabIndex = 170;
             this.mGame7.TabStop = false;
+            this.mGame7.Click += new System.EventHandler(this.mGame7_Click);
             // 
             // mGame6
             // 
@@ -700,6 +722,7 @@
             this.mGame6.Size = new System.Drawing.Size(43, 42);
             this.mGame6.TabIndex = 169;
             this.mGame6.TabStop = false;
+            this.mGame6.Click += new System.EventHandler(this.mGame6_Click);
             // 
             // mGame5
             // 
@@ -710,6 +733,7 @@
             this.mGame5.Size = new System.Drawing.Size(43, 42);
             this.mGame5.TabIndex = 168;
             this.mGame5.TabStop = false;
+            this.mGame5.Click += new System.EventHandler(this.mGame5_Click);
             // 
             // mGame4
             // 
@@ -720,6 +744,7 @@
             this.mGame4.Size = new System.Drawing.Size(43, 42);
             this.mGame4.TabIndex = 167;
             this.mGame4.TabStop = false;
+            this.mGame4.Click += new System.EventHandler(this.mGame4_Click);
             // 
             // mGame3
             // 
@@ -730,6 +755,7 @@
             this.mGame3.Size = new System.Drawing.Size(43, 42);
             this.mGame3.TabIndex = 166;
             this.mGame3.TabStop = false;
+            this.mGame3.Click += new System.EventHandler(this.mGame3_Click);
             // 
             // mGame2
             // 
@@ -740,6 +766,7 @@
             this.mGame2.Size = new System.Drawing.Size(43, 42);
             this.mGame2.TabIndex = 165;
             this.mGame2.TabStop = false;
+            this.mGame2.Click += new System.EventHandler(this.mGame2_Click);
             // 
             // mGame1
             // 
@@ -750,6 +777,7 @@
             this.mGame1.Size = new System.Drawing.Size(43, 42);
             this.mGame1.TabIndex = 164;
             this.mGame1.TabStop = false;
+            this.mGame1.Click += new System.EventHandler(this.mGame1_Click);
             // 
             // gGame88
             // 
