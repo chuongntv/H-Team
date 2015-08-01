@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Data;
+using System.Data.OleDb;
 namespace eduRobot
 {
     public partial class frmMain : Form
@@ -49,8 +51,526 @@ namespace eduRobot
         private int numberOfLight, numberOfLightIsOn;
         private int level = 1;
         private string playerName;
+        private OleDbConnection conn;
+        private OleDbDataReader reader;
+        private OleDbCommand cmd;
+        private string sqlStr;
         #endregion
 
+        #region Methods
+        private int checkStatusOfRobot(int xRobot, int yRobot)
+        {
+            if (arrStatusMap[xRobot, yRobot] == MAP_CANGO)
+            {
+                if (trendOfRobot == ROBOT_UP)
+                    return MAP_ROBOT_UP;
+                else if (trendOfRobot == ROBOT_DOWN)
+                    return MAP_ROBOT_DOWN;
+                else if (trendOfRobot == ROBOT_LEFT)
+                    return MAP_ROBOT_LEFT;
+                else if (trendOfRobot == ROBOT_RIGHT)
+                    return MAP_ROBOT_RIGHT;
+            }
+            else if (arrStatusMap[xRobot, yRobot] == MAP_LIGHT_UP)
+            {
+                if (trendOfRobot == ROBOT_UP)
+                    return MAP_ROBOT_UP_LIGHT_ON;
+                else if (trendOfRobot == ROBOT_DOWN)
+                    return MAP_ROBOT_DOWN_LIGHT_ON;
+                else if (trendOfRobot == ROBOT_LEFT)
+                    return MAP_ROBOT_LEFT_LIGHT_ON;
+                else if (trendOfRobot == ROBOT_RIGHT)
+                    return MAP_ROBOT_RIGHT_LIGHT_ON;
+            }
+            else if (arrStatusMap[xRobot, yRobot] == MAP_LIGHT_ON)
+            {
+                if (trendOfRobot == ROBOT_UP)
+                    return MAP_ROBOT_UP_LIGHT_OFF;
+                else if (trendOfRobot == ROBOT_DOWN)
+                    return MAP_ROBOT_DOWN_LIGHT_OFF;
+                else if (trendOfRobot == ROBOT_LEFT)
+                    return MAP_ROBOT_LEFT_LIGHT_OFF;
+                else if (trendOfRobot == ROBOT_RIGHT)
+                    return MAP_ROBOT_RIGHT_LIGHT_OFF;
+            }
+            return 0;
+        }
+        private void checkGoStraight()
+        {
+            if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+            {
+                arrStatusMap[xRobot, yRobot] = MAP_CANGO;
+            }
+            else if (arrMap[xRobot, yRobot] == MAP_LIGHT_ON)
+            {
+                if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_UP_LIGHT_ON || arrStatusMap[xRobot, yRobot] == MAP_ROBOT_DOWN_LIGHT_ON || arrStatusMap[xRobot, yRobot] == MAP_ROBOT_LEFT_LIGHT_ON || arrStatusMap[xRobot, yRobot] == MAP_ROBOT_RIGHT_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_LIGHT_UP;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_LIGHT_ON;
+            }
+        }
+        private void goStraight()
+        {
+
+            if (trendOfRobot == ROBOT_LEFT)
+            {
+                if (arrStatusMap[xRobot, yRobot - 1] != MAP_VIRUS && yRobot > 1)
+                {
+                    checkGoStraight();
+                    arrStatusMap[xRobot, yRobot - 1] = checkStatusOfRobot(xRobot, --yRobot);
+                }
+            }
+
+            else if (trendOfRobot == ROBOT_RIGHT)
+            {
+                if (arrStatusMap[xRobot, yRobot + 1] != MAP_VIRUS && yRobot < 8)
+                {
+                    checkGoStraight();
+                    arrStatusMap[xRobot, yRobot + 1] = checkStatusOfRobot(xRobot, ++yRobot);
+                }
+            }
+            else if (trendOfRobot == ROBOT_UP)
+            {
+
+                if (arrStatusMap[xRobot - 1, yRobot] != MAP_VIRUS && xRobot > 1)
+                {
+                    checkGoStraight();
+                    arrStatusMap[xRobot - 1, yRobot] = checkStatusOfRobot(--xRobot, yRobot);
+                }
+            }
+            else if (trendOfRobot == ROBOT_DOWN)
+            {
+                if (arrStatusMap[xRobot + 1, yRobot] != MAP_VIRUS && xRobot < 8)
+                {
+                    checkGoStraight();
+                    arrStatusMap[xRobot + 1, yRobot] = checkStatusOfRobot(++xRobot, yRobot);
+                }
+            }
+        }
+        private void turnLeft()
+        {
+            if (trendOfRobot == ROBOT_UP)
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_UP_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT_LIGHT_OFF;
+                trendOfRobot = ROBOT_LEFT;
+            }
+            else if (trendOfRobot == ROBOT_LEFT)
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_LEFT_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN_LIGHT_OFF;
+                trendOfRobot = ROBOT_DOWN;
+            }
+            else if (trendOfRobot == ROBOT_DOWN)
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_DOWN_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT_LIGHT_OFF;
+                trendOfRobot = ROBOT_RIGHT;
+            }
+            else
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_RIGHT_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP_LIGHT_OFF;
+                trendOfRobot = ROBOT_UP;
+            }
+        }
+        private void turnRight()
+        {
+            if (trendOfRobot == ROBOT_UP)
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_UP_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT_LIGHT_OFF;
+                trendOfRobot = ROBOT_RIGHT;
+            }
+            else if (trendOfRobot == ROBOT_LEFT)
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_LEFT_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP_LIGHT_OFF;
+                trendOfRobot = ROBOT_UP;
+            }
+            else if (trendOfRobot == ROBOT_DOWN)
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_DOWN_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT_LIGHT_OFF;
+                trendOfRobot = ROBOT_LEFT;
+            }
+            else
+            {
+                if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN;
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_RIGHT_LIGHT_ON)
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN_LIGHT_ON;
+                else
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN_LIGHT_OFF;
+                trendOfRobot = ROBOT_DOWN;
+            }
+        }
+        private void resetAll()
+        {
+            for (int i = 0; i < 13; i++)
+                arrCmdOfMain[i] = 0;
+            for (int i = 0; i < 9; i++)
+            {
+                arrCmdOfF1[i] = 0;
+                arrCmdOfF2[i] = 0;
+            }
+            for (int i = 0; i < 10; i++)
+                for (int j = 0; j < 10; j++)
+                    arrStatusMap[i, j] = arrMap[i, j];
+        }
+        private void loadLevel(int level)
+        {
+            if (File.Exists("Map\\" + level + ".map"))
+            {
+                if (level != 1)
+                {                    
+                    try
+                    {
+                        conn.Open();
+                        sqlStr = "INSERT INTO rankinglogs(nickname,levelnumber,point,timesave) VALUES ('" + this.playerName + "','" + (level-1) + "','" + (int.Parse(lblPoint.Text) - int.Parse(lastPoint)) + "','" + DateTime.Now.ToString() + "')";
+                        cmd = new OleDbCommand(sqlStr, conn);
+                        cmd.ExecuteScalar();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Have some problem, so your point can't save", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    finally
+                    {
+                        try
+                        {
+                            conn.Close();
+                        }
+                        catch
+                        {
+
+                        }
+                    }
+                    lastPoint = lblPoint.Text;
+                    MessageBox.Show("You are complete " + (level - 1) + ". You will be redirect to level " + level);
+                }
+
+                resetAll();
+                var pics = this.Controls
+                                        .OfType<PictureBox>().OrderBy(b => b.Name)
+                                        .Where(b => b.Name.Substring(0, 5).Equals("mGame"));
+
+                foreach (var pic in pics)
+                {
+                    pic.Image = null;
+                }
+                pics = this.Controls
+                                        .OfType<PictureBox>().OrderBy(b => b.Name)
+                                        .Where(b => b.Name.Substring(0, 5).Equals("f1Gam"));
+
+                foreach (var pic in pics)
+                {
+                    pic.Image = null;
+                }
+                pics = this.Controls
+                                        .OfType<PictureBox>().OrderBy(b => b.Name)
+                                        .Where(b => b.Name.Substring(0, 5).Equals("f2Gam"));
+
+                foreach (var pic in pics)
+                {
+                    pic.Image = null;
+                }
+                trendOfRobot = ROBOT_UP;
+                numberOfLight = 0;
+                numberOfLightIsOn = 0;
+                StreamReader sr = File.OpenText("Map\\" + level + ".map");
+                string input = null;
+                input = sr.ReadLine();
+                xRobot = input[0] - 48;
+                xRobotBegin = xRobot;
+                yRobot = input[2] - 48;
+                yRobotBegin = yRobot;
+                for (int i = 1; i <= 8; i++)
+                {
+                    input = sr.ReadLine();
+                    string[] s = input.Split(' ');
+                    for (int j = 1; j <= 8; j++)
+                    {
+                        arrMap[i, j] = int.Parse(s[j - 1]);
+                        arrStatusMap[i, j] = arrMap[i, j];
+                        if (arrMap[i, j] == MAP_LIGHT_ON)
+                            numberOfLight++;
+                    }
+                }
+                sr.Close();
+                updateMap();
+                if (this.btnPlay.InvokeRequired)
+                {
+                    btnPlay.Invoke(new MethodInvoker(delegate { btnPlay.Enabled = true; }));
+                }
+                else
+                {
+                    btnPlay.Enabled = true;
+                }
+                if (this.btnStop.InvokeRequired)
+                {
+                    btnStop.Invoke(new MethodInvoker(delegate { btnStop.Enabled = false; }));
+                }
+                else
+                {
+                    btnStop.Enabled = false;
+                }
+                if (this.btnClear.InvokeRequired)
+                {
+                    btnClear.Invoke(new MethodInvoker(delegate { btnClear.Enabled = true; }));
+                }
+                else
+                {
+                    btnClear.Enabled = true;
+                }
+            }
+            else
+            {
+                if (this.btnPlay.InvokeRequired)
+                {
+                    btnPlay.Invoke(new MethodInvoker(delegate { btnPlay.Enabled = false; }));
+                }
+                else
+                {
+                    btnPlay.Enabled = false;
+                }
+                if (this.btnStop.InvokeRequired)
+                {
+                    btnStop.Invoke(new MethodInvoker(delegate { btnStop.Enabled = false; }));
+                }
+                else
+                {
+                    btnStop.Enabled = false;
+                }
+                if (this.btnClear.InvokeRequired)
+                {
+                    btnClear.Invoke(new MethodInvoker(delegate { btnClear.Enabled = false; }));
+                }
+                else
+                {
+                    btnClear.Enabled = false;
+                }
+                MessageBox.Show("Congratulation! You are finish game with " + lblPoint.Text, " command(s).\nPlease visit homepage to get more map.", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+        private void processLight()
+        {
+
+            if (arrMap[xRobot, yRobot] == MAP_LIGHT_ON)
+            {
+                if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_UP_LIGHT_OFF)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP_LIGHT_ON;
+                    numberOfLightIsOn++;
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_DOWN_LIGHT_OFF)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN_LIGHT_ON;
+                    numberOfLightIsOn++;
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_LEFT_LIGHT_OFF)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT_LIGHT_ON;
+                    numberOfLightIsOn++;
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_RIGHT_LIGHT_OFF)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT_LIGHT_ON;
+                    numberOfLightIsOn++;
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_DOWN_LIGHT_ON)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_DOWN_LIGHT_OFF;
+                    numberOfLightIsOn++;
+
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_UP_LIGHT_ON)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_UP_LIGHT_OFF;
+                    numberOfLightIsOn--;
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_LEFT_LIGHT_ON)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_LEFT_LIGHT_OFF;
+                    numberOfLightIsOn--;
+                }
+                else if (arrStatusMap[xRobot, yRobot] == MAP_ROBOT_RIGHT_LIGHT_ON)
+                {
+                    arrStatusMap[xRobot, yRobot] = MAP_ROBOT_RIGHT_LIGHT_OFF;
+                    numberOfLightIsOn--;
+                }
+            }
+        }
+        private void callF1()
+        {
+            for (int i = 1; i <= 8; i++)
+            {
+                if (arrCmdOfF1[i] == 0)
+                    break;
+                bool isDo = false;
+                if (arrCmdOfF1[i] == 1)
+                {
+                    goStraight();
+                    isDo = true;
+                }
+                if (arrCmdOfF1[i] == 2)
+                {
+                    turnLeft();
+                    isDo = true;
+                }
+                if (arrCmdOfF1[i] == 3)
+                {
+                    turnRight();
+                    isDo = true;
+                }
+                if (arrCmdOfF1[i] == 4)
+                {
+                    processLight();
+                    isDo = true;
+                }
+                if (arrCmdOfF1[i] == 5)
+                {
+                    callF1();
+                    isDo = true;
+                }
+                if (arrCmdOfF1[i] == 6)
+                {
+                    callF2();
+                    isDo = true;
+                }
+                if (isDo)
+                {
+                    if (this.lblPoint.InvokeRequired)
+                    {
+                        lblPoint.Invoke(new MethodInvoker(delegate { lblPoint.Text = (int.Parse(lblPoint.Text) + 1) + ""; }));
+                    }
+                    else
+                    {
+                        lblPoint.Text = (int.Parse(lblPoint.Text) + 1) + "";
+                    }
+                }
+
+                updateMap();
+                if (isStop == true)
+                {
+                    isStop = false;
+                    return;
+                }
+                Thread.Sleep(300);
+            }
+
+
+
+        }
+        private void callF2()
+        {
+            for (int i = 1; i <= 8; i++)
+            {
+                if (arrCmdOfF2[i] == 0)
+                    break;
+                bool isDo = false;
+                if (arrCmdOfF2[i] == 1)
+                {
+                    goStraight();
+                    isDo = true;
+                }
+                if (arrCmdOfF2[i] == 2)
+                {
+                    turnLeft();
+                    isDo = true;
+                }
+                if (arrCmdOfF2[i] == 3)
+                {
+                    turnRight();
+                    isDo = true;
+                }
+                if (arrCmdOfF2[i] == 4)
+                {
+                    processLight();
+                    isDo = true;
+                }
+                if (arrCmdOfF2[i] == 5)
+                {
+                    callF1();
+                    isDo = true;
+                }
+                if (arrCmdOfF2[i] == 6)
+                {
+                    callF2();
+                    isDo = true;
+                }
+                if (isDo)
+                {
+                    if (this.lblPoint.InvokeRequired)
+                    {
+                        lblPoint.Invoke(new MethodInvoker(delegate { lblPoint.Text = (int.Parse(lblPoint.Text) + 1) + ""; }));
+                    }
+                    else
+                    {
+                        lblPoint.Text = (int.Parse(lblPoint.Text) + 1) + "";
+                    }
+                }
+
+                updateMap();
+                if (isStop == true)
+                {
+                    isStop = false;
+                    return;
+                }
+                Thread.Sleep(300);
+            }
+        }
+        private void updateMap()
+        {
+            int i = 1, j = 1;
+            var pics = this.Controls
+                                    .OfType<PictureBox>().OrderBy(b => b.Name)
+                                    .Where(b => b.Name.Substring(0, 5).Equals("gGame"));
+
+            foreach (var pic in pics)
+            {
+                if (arrStatusMap[i, j] == 0)
+                    pic.Image = null;
+                else
+                    pic.Image = arrImageOfMap.Images[arrStatusMap[i, j]];
+                j++;
+                if (j > 8)
+                {
+                    j = 1;
+                    i++;
+                }
+            }
+        }
+        #endregion
+       
         private void mGame1_Click(object sender, EventArgs e)
         {
             int i = 1;
@@ -330,18 +850,168 @@ namespace eduRobot
             else
                 f2Game8.Image = arrImage.Images[arrCmdOfF2[i]];
         }
+
+        private void btnPlay_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                trendOfRobot = ROBOT_UP;
+                isStop = false;
+                numberOfLightIsOn = 0;
+                lastPoint = lblPoint.Text;
+                btnPlay.Enabled = false;
+                btnStop.Enabled = true;
+                btnClear.Enabled = false;
+                bgwRun.RunWorkerAsync();
+            }
+            catch
+            {
+
+            }
+        }
+
+        private void bgwRun_DoWork(object sender, DoWorkEventArgs e)
+        {
+            for (int i = 1; i <= 12; i++)
+            {
+                if (arrCmdOfMain[i] == 0)
+                    break;
+                bool isDo = false;
+                if (arrCmdOfMain[i] == 1)
+                {
+                    goStraight();
+                    isDo = true;
+                }
+                if (arrCmdOfMain[i] == 2)
+                {
+                    turnLeft();
+                    isDo = true;
+                }
+                if (arrCmdOfMain[i] == 3)
+                {
+                    turnRight();
+                    isDo = true;
+                }
+                if (arrCmdOfMain[i] == 4)
+                {
+                    processLight();
+                    isDo = true;
+                }
+                if (arrCmdOfMain[i] == 5)
+                {
+                    callF1();
+                    isDo = true;
+                }
+                if (arrCmdOfMain[i] == 6)
+                {
+                    callF2();
+                    isDo = true;
+                }
+                if (isDo)
+                {
+                    if (this.lblPoint.InvokeRequired)
+                    {
+                        lblPoint.Invoke(new MethodInvoker(delegate { lblPoint.Text = (int.Parse(lblPoint.Text) + 1) + ""; }));
+                    }
+                    else
+                    {
+                        lblPoint.Text = (int.Parse(lblPoint.Text) + 1) + "";
+                    }
+                }
+
+                updateMap();
+                if (isStop == true)
+                {
+                    isStop = false;
+                    return;
+                }
+                Thread.Sleep(300);
+            }
+            if (numberOfLight == numberOfLightIsOn)
+            {
+                loadLevel(++level);
+            }
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            lblPoint.Text = lastPoint;
+            btnPlay.Enabled = true;
+            btnStop.Enabled = false;
+            btnClear.Enabled = true;
+            xRobot = xRobotBegin;
+            yRobot = yRobotBegin;
+            for (int i = 0; i < 10; i++)
+                for (int j = 0; j < 10; j++)
+                    arrStatusMap[i, j] = arrMap[i, j];
+            updateMap();
+            isStop = true;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            lblPoint.Text = lastPoint;
+            xRobot = xRobotBegin;
+            yRobot = yRobotBegin;
+            resetAll();
+            updateMap();
+            var pics = this.Controls
+                                    .OfType<PictureBox>().OrderBy(b => b.Name)
+                                    .Where(b => b.Name.Substring(0, 5).Equals("mGame"));
+
+            foreach (var pic in pics)
+            {
+                pic.Image = null;
+            }
+            pics = this.Controls
+                                    .OfType<PictureBox>().OrderBy(b => b.Name)
+                                    .Where(b => b.Name.Substring(0, 5).Equals("f1Gam"));
+
+            foreach (var pic in pics)
+            {
+                pic.Image = null;
+            }
+            pics = this.Controls
+                                    .OfType<PictureBox>().OrderBy(b => b.Name)
+                                    .Where(b => b.Name.Substring(0, 5).Equals("f2Gam"));
+
+            foreach (var pic in pics)
+            {
+                pic.Image = null;
+            }
+        }
+
+        private void btnAbout_Click(object sender, EventArgs e)
+        {
+            frmAbout frm = new frmAbout();
+            frm.ShowDialog();
+        }
+
+        private void btnRank_Click(object sender, EventArgs e)
+        {
+            frmRanking frm = new frmRanking();
+            frm.ShowDialog();
+        }
+
+        private void frmMain_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
         public frmMain()
         {
+            conn = new OleDbConnection(Program.conStr);
             InitializeComponent();
         }
         public frmMain(string playerName)
         {
+            conn = new OleDbConnection(Program.conStr);
             this.playerName = playerName;
             InitializeComponent();
         }
         private void frmMain_Load(object sender, EventArgs e)
         {
-            
+            loadLevel(1);
         }
     }
 }

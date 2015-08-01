@@ -31,21 +31,12 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmMain));
             this.arrImageOfMap = new System.Windows.Forms.ImageList(this.components);
-            this.pHeader = new System.Windows.Forms.Panel();
-            this.btnAbout = new System.Windows.Forms.Button();
-            this.btnClear = new System.Windows.Forms.Button();
-            this.btnPlay = new System.Windows.Forms.Button();
-            this.pbHeader = new System.Windows.Forms.PictureBox();
-            this.btnRank = new System.Windows.Forms.Button();
-            this.lblPoint = new System.Windows.Forms.Label();
-            this.btnStop = new System.Windows.Forms.Button();
-            this.pbUp = new System.Windows.Forms.PictureBox();
-            this.pbF2 = new System.Windows.Forms.PictureBox();
-            this.pbLeft = new System.Windows.Forms.PictureBox();
-            this.btnHelp = new System.Windows.Forms.Button();
-            this.pbF1 = new System.Windows.Forms.PictureBox();
-            this.pbRight = new System.Windows.Forms.PictureBox();
-            this.pbLight = new System.Windows.Forms.PictureBox();
+            this.arrImage = new System.Windows.Forms.ImageList(this.components);
+            this.bgwRun = new System.ComponentModel.BackgroundWorker();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
             this.f2Game8 = new System.Windows.Forms.PictureBox();
             this.f2Game7 = new System.Windows.Forms.PictureBox();
             this.f2Game6 = new System.Windows.Forms.PictureBox();
@@ -138,20 +129,21 @@
             this.gGame13 = new System.Windows.Forms.PictureBox();
             this.gGame12 = new System.Windows.Forms.PictureBox();
             this.gGame11 = new System.Windows.Forms.PictureBox();
-            this.arrImage = new System.Windows.Forms.ImageList(this.components);
-            this.bgwRun = new System.ComponentModel.BackgroundWorker();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.pHeader.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUp)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbF2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbF1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRight)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLight)).BeginInit();
+            this.pHeader = new System.Windows.Forms.Panel();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btnAbout = new System.Windows.Forms.Button();
+            this.btnClear = new System.Windows.Forms.Button();
+            this.btnPlay = new System.Windows.Forms.Button();
+            this.pbHeader = new System.Windows.Forms.PictureBox();
+            this.btnRank = new System.Windows.Forms.Button();
+            this.lblPoint = new System.Windows.Forms.Label();
+            this.btnStop = new System.Windows.Forms.Button();
+            this.pbUp = new System.Windows.Forms.PictureBox();
+            this.pbF2 = new System.Windows.Forms.PictureBox();
+            this.pbLeft = new System.Windows.Forms.PictureBox();
+            this.pbF1 = new System.Windows.Forms.PictureBox();
+            this.pbRight = new System.Windows.Forms.PictureBox();
+            this.pbLight = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.f2Game8)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.f2Game7)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.f2Game6)).BeginInit();
@@ -244,6 +236,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gGame13)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gGame12)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gGame11)).BeginInit();
+            this.pHeader.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUp)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbF2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbF1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLight)).BeginInit();
             this.SuspendLayout();
             // 
             // arrImageOfMap
@@ -267,209 +268,66 @@
             this.arrImageOfMap.Images.SetKeyName(14, "light_off.png");
             this.arrImageOfMap.Images.SetKeyName(15, "virus.png");
             // 
-            // pHeader
+            // arrImage
             // 
-            this.pHeader.BackgroundImage = global::eduRobot.Properties.Resources.Header;
-            this.pHeader.Controls.Add(this.btnAbout);
-            this.pHeader.Controls.Add(this.btnClear);
-            this.pHeader.Controls.Add(this.btnPlay);
-            this.pHeader.Controls.Add(this.pbHeader);
-            this.pHeader.Controls.Add(this.btnRank);
-            this.pHeader.Controls.Add(this.lblPoint);
-            this.pHeader.Controls.Add(this.btnStop);
-            this.pHeader.Controls.Add(this.pbUp);
-            this.pHeader.Controls.Add(this.pbF2);
-            this.pHeader.Controls.Add(this.pbLeft);
-            this.pHeader.Controls.Add(this.btnHelp);
-            this.pHeader.Controls.Add(this.pbF1);
-            this.pHeader.Controls.Add(this.pbRight);
-            this.pHeader.Controls.Add(this.pbLight);
-            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
-            this.pHeader.Location = new System.Drawing.Point(0, 0);
-            this.pHeader.Name = "pHeader";
-            this.pHeader.Size = new System.Drawing.Size(585, 127);
-            this.pHeader.TabIndex = 0;
+            this.arrImage.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("arrImage.ImageStream")));
+            this.arrImage.TransparentColor = System.Drawing.Color.Transparent;
+            this.arrImage.Images.SetKeyName(0, "Icon.png");
+            this.arrImage.Images.SetKeyName(1, "GoUp.png");
+            this.arrImage.Images.SetKeyName(2, "TurnLeft.png");
+            this.arrImage.Images.SetKeyName(3, "TurnRight.png");
+            this.arrImage.Images.SetKeyName(4, "Light.png");
+            this.arrImage.Images.SetKeyName(5, "Function1.png");
+            this.arrImage.Images.SetKeyName(6, "Function2.png");
             // 
-            // btnAbout
+            // bgwRun
             // 
-            this.btnAbout.BackColor = System.Drawing.Color.Transparent;
-            this.btnAbout.FlatAppearance.BorderSize = 0;
-            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnAbout.Image = global::eduRobot.Properties.Resources.About;
-            this.btnAbout.Location = new System.Drawing.Point(451, 8);
-            this.btnAbout.Margin = new System.Windows.Forms.Padding(2);
-            this.btnAbout.Name = "btnAbout";
-            this.btnAbout.Size = new System.Drawing.Size(56, 55);
-            this.btnAbout.TabIndex = 125;
-            this.btnAbout.UseVisualStyleBackColor = false;
+            this.bgwRun.WorkerSupportsCancellation = true;
+            this.bgwRun.DoWork += new System.ComponentModel.DoWorkEventHandler(this.bgwRun_DoWork);
             // 
-            // btnClear
+            // label1
             // 
-            this.btnClear.BackColor = System.Drawing.Color.Transparent;
-            this.btnClear.Enabled = false;
-            this.btnClear.FlatAppearance.BorderSize = 0;
-            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnClear.Image = global::eduRobot.Properties.Resources.Clear;
-            this.btnClear.Location = new System.Drawing.Point(511, 77);
-            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
-            this.btnClear.Name = "btnClear";
-            this.btnClear.Size = new System.Drawing.Size(56, 42);
-            this.btnClear.TabIndex = 124;
-            this.btnClear.UseVisualStyleBackColor = false;
+            this.label1.AutoSize = true;
+            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
+            this.label1.Location = new System.Drawing.Point(23, 132);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(38, 16);
+            this.label1.TabIndex = 192;
+            this.label1.Text = "Map";
             // 
-            // btnPlay
+            // label2
             // 
-            this.btnPlay.BackColor = System.Drawing.Color.Transparent;
-            this.btnPlay.Enabled = false;
-            this.btnPlay.FlatAppearance.BorderSize = 0;
-            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnPlay.Image = global::eduRobot.Properties.Resources.Run;
-            this.btnPlay.Location = new System.Drawing.Point(391, 77);
-            this.btnPlay.Margin = new System.Windows.Forms.Padding(2);
-            this.btnPlay.Name = "btnPlay";
-            this.btnPlay.Size = new System.Drawing.Size(56, 42);
-            this.btnPlay.TabIndex = 123;
-            this.btnPlay.UseVisualStyleBackColor = false;
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.ForeColor = System.Drawing.Color.Red;
+            this.label2.Location = new System.Drawing.Point(387, 132);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(107, 16);
+            this.label2.TabIndex = 193;
+            this.label2.Text = "Function: Main";
             // 
-            // pbHeader
+            // label3
             // 
-            this.pbHeader.BackColor = System.Drawing.Color.Transparent;
-            this.pbHeader.Image = global::eduRobot.Properties.Resources.Logo;
-            this.pbHeader.Location = new System.Drawing.Point(26, 3);
-            this.pbHeader.Name = "pbHeader";
-            this.pbHeader.Size = new System.Drawing.Size(336, 69);
-            this.pbHeader.TabIndex = 122;
-            this.pbHeader.TabStop = false;
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.label3.Location = new System.Drawing.Point(387, 280);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(98, 16);
+            this.label3.TabIndex = 194;
+            this.label3.Text = "Function: Fx1";
             // 
-            // btnRank
+            // label4
             // 
-            this.btnRank.BackColor = System.Drawing.Color.Transparent;
-            this.btnRank.FlatAppearance.BorderSize = 0;
-            this.btnRank.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnRank.Image = global::eduRobot.Properties.Resources.Ranking2;
-            this.btnRank.Location = new System.Drawing.Point(391, 8);
-            this.btnRank.Margin = new System.Windows.Forms.Padding(2);
-            this.btnRank.Name = "btnRank";
-            this.btnRank.Size = new System.Drawing.Size(56, 55);
-            this.btnRank.TabIndex = 118;
-            this.btnRank.UseVisualStyleBackColor = false;
-            // 
-            // lblPoint
-            // 
-            this.lblPoint.BackColor = System.Drawing.Color.Transparent;
-            this.lblPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
-            this.lblPoint.Location = new System.Drawing.Point(295, 77);
-            this.lblPoint.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblPoint.Name = "lblPoint";
-            this.lblPoint.Size = new System.Drawing.Size(83, 42);
-            this.lblPoint.TabIndex = 121;
-            this.lblPoint.Text = "0";
-            this.lblPoint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            // 
-            // btnStop
-            // 
-            this.btnStop.BackColor = System.Drawing.Color.Transparent;
-            this.btnStop.Enabled = false;
-            this.btnStop.FlatAppearance.BorderSize = 0;
-            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnStop.Image = global::eduRobot.Properties.Resources.Stop;
-            this.btnStop.Location = new System.Drawing.Point(451, 77);
-            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
-            this.btnStop.Name = "btnStop";
-            this.btnStop.Size = new System.Drawing.Size(56, 42);
-            this.btnStop.TabIndex = 115;
-            this.btnStop.UseVisualStyleBackColor = false;
-            // 
-            // pbUp
-            // 
-            this.pbUp.BackColor = System.Drawing.Color.Transparent;
-            this.pbUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbUp.Image = global::eduRobot.Properties.Resources.GoUp;
-            this.pbUp.Location = new System.Drawing.Point(26, 77);
-            this.pbUp.Margin = new System.Windows.Forms.Padding(2);
-            this.pbUp.Name = "pbUp";
-            this.pbUp.Size = new System.Drawing.Size(43, 42);
-            this.pbUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbUp.TabIndex = 109;
-            this.pbUp.TabStop = false;
-            // 
-            // pbF2
-            // 
-            this.pbF2.BackColor = System.Drawing.Color.Transparent;
-            this.pbF2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbF2.Image = global::eduRobot.Properties.Resources.Function2;
-            this.pbF2.Location = new System.Drawing.Point(239, 77);
-            this.pbF2.Margin = new System.Windows.Forms.Padding(2);
-            this.pbF2.Name = "pbF2";
-            this.pbF2.Size = new System.Drawing.Size(43, 42);
-            this.pbF2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbF2.TabIndex = 120;
-            this.pbF2.TabStop = false;
-            // 
-            // pbLeft
-            // 
-            this.pbLeft.BackColor = System.Drawing.Color.Transparent;
-            this.pbLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbLeft.Image = global::eduRobot.Properties.Resources.TurnLeft;
-            this.pbLeft.Location = new System.Drawing.Point(68, 77);
-            this.pbLeft.Margin = new System.Windows.Forms.Padding(2);
-            this.pbLeft.Name = "pbLeft";
-            this.pbLeft.Size = new System.Drawing.Size(43, 42);
-            this.pbLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbLeft.TabIndex = 110;
-            this.pbLeft.TabStop = false;
-            // 
-            // btnHelp
-            // 
-            this.btnHelp.BackColor = System.Drawing.Color.Transparent;
-            this.btnHelp.FlatAppearance.BorderSize = 0;
-            this.btnHelp.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.btnHelp.Image = global::eduRobot.Properties.Resources.Help;
-            this.btnHelp.Location = new System.Drawing.Point(511, 8);
-            this.btnHelp.Margin = new System.Windows.Forms.Padding(2);
-            this.btnHelp.Name = "btnHelp";
-            this.btnHelp.Size = new System.Drawing.Size(56, 55);
-            this.btnHelp.TabIndex = 119;
-            this.btnHelp.UseVisualStyleBackColor = false;
-            // 
-            // pbF1
-            // 
-            this.pbF1.BackColor = System.Drawing.Color.Transparent;
-            this.pbF1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbF1.Image = global::eduRobot.Properties.Resources.Function1;
-            this.pbF1.Location = new System.Drawing.Point(196, 77);
-            this.pbF1.Margin = new System.Windows.Forms.Padding(2);
-            this.pbF1.Name = "pbF1";
-            this.pbF1.Size = new System.Drawing.Size(43, 42);
-            this.pbF1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbF1.TabIndex = 113;
-            this.pbF1.TabStop = false;
-            // 
-            // pbRight
-            // 
-            this.pbRight.BackColor = System.Drawing.Color.Transparent;
-            this.pbRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbRight.Image = global::eduRobot.Properties.Resources.TurnRight;
-            this.pbRight.Location = new System.Drawing.Point(111, 77);
-            this.pbRight.Margin = new System.Windows.Forms.Padding(2);
-            this.pbRight.Name = "pbRight";
-            this.pbRight.Size = new System.Drawing.Size(43, 42);
-            this.pbRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbRight.TabIndex = 111;
-            this.pbRight.TabStop = false;
-            // 
-            // pbLight
-            // 
-            this.pbLight.BackColor = System.Drawing.Color.Transparent;
-            this.pbLight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pbLight.Image = global::eduRobot.Properties.Resources.Light;
-            this.pbLight.Location = new System.Drawing.Point(154, 77);
-            this.pbLight.Margin = new System.Windows.Forms.Padding(2);
-            this.pbLight.Name = "pbLight";
-            this.pbLight.Size = new System.Drawing.Size(43, 42);
-            this.pbLight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pbLight.TabIndex = 112;
-            this.pbLight.TabStop = false;
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.ForeColor = System.Drawing.Color.MediumBlue;
+            this.label4.Location = new System.Drawing.Point(388, 385);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(98, 16);
+            this.label4.TabIndex = 195;
+            this.label4.Text = "Function: Fx2";
             // 
             // f2Game8
             // 
@@ -1419,65 +1277,212 @@
             this.gGame11.TabIndex = 100;
             this.gGame11.TabStop = false;
             // 
-            // arrImage
+            // pHeader
             // 
-            this.arrImage.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("arrImage.ImageStream")));
-            this.arrImage.TransparentColor = System.Drawing.Color.Transparent;
-            this.arrImage.Images.SetKeyName(0, "Icon.png");
-            this.arrImage.Images.SetKeyName(1, "GoUp.png");
-            this.arrImage.Images.SetKeyName(2, "TurnLeft.png");
-            this.arrImage.Images.SetKeyName(3, "TurnRight.png");
-            this.arrImage.Images.SetKeyName(4, "Light.png");
-            this.arrImage.Images.SetKeyName(5, "Function1.png");
-            this.arrImage.Images.SetKeyName(6, "Function2.png");
+            this.pHeader.BackgroundImage = global::eduRobot.Properties.Resources.Header;
+            this.pHeader.Controls.Add(this.pictureBox1);
+            this.pHeader.Controls.Add(this.btnAbout);
+            this.pHeader.Controls.Add(this.btnClear);
+            this.pHeader.Controls.Add(this.btnPlay);
+            this.pHeader.Controls.Add(this.pbHeader);
+            this.pHeader.Controls.Add(this.btnRank);
+            this.pHeader.Controls.Add(this.lblPoint);
+            this.pHeader.Controls.Add(this.btnStop);
+            this.pHeader.Controls.Add(this.pbUp);
+            this.pHeader.Controls.Add(this.pbF2);
+            this.pHeader.Controls.Add(this.pbLeft);
+            this.pHeader.Controls.Add(this.pbF1);
+            this.pHeader.Controls.Add(this.pbRight);
+            this.pHeader.Controls.Add(this.pbLight);
+            this.pHeader.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pHeader.Location = new System.Drawing.Point(0, 0);
+            this.pHeader.Name = "pHeader";
+            this.pHeader.Size = new System.Drawing.Size(585, 127);
+            this.pHeader.TabIndex = 0;
             // 
-            // bgwRun
+            // pictureBox1
             // 
-            this.bgwRun.WorkerSupportsCancellation = true;
+            this.pictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.pictureBox1.Image = global::eduRobot.Properties.Resources._1438428975_search;
+            this.pictureBox1.Location = new System.Drawing.Point(26, 3);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(77, 69);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 126;
+            this.pictureBox1.TabStop = false;
             // 
-            // label1
+            // btnAbout
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(64)))), ((int)(((byte)(64)))), ((int)(((byte)(0)))));
-            this.label1.Location = new System.Drawing.Point(23, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(38, 16);
-            this.label1.TabIndex = 192;
-            this.label1.Text = "Map";
+            this.btnAbout.BackColor = System.Drawing.Color.Transparent;
+            this.btnAbout.FlatAppearance.BorderSize = 0;
+            this.btnAbout.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnAbout.Image = global::eduRobot.Properties.Resources.About;
+            this.btnAbout.Location = new System.Drawing.Point(511, 11);
+            this.btnAbout.Margin = new System.Windows.Forms.Padding(2);
+            this.btnAbout.Name = "btnAbout";
+            this.btnAbout.Size = new System.Drawing.Size(56, 55);
+            this.btnAbout.TabIndex = 125;
+            this.btnAbout.UseVisualStyleBackColor = false;
+            this.btnAbout.Click += new System.EventHandler(this.btnAbout_Click);
             // 
-            // label2
+            // btnClear
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.Red;
-            this.label2.Location = new System.Drawing.Point(387, 132);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(107, 16);
-            this.label2.TabIndex = 193;
-            this.label2.Text = "Function: Main";
+            this.btnClear.BackColor = System.Drawing.Color.Transparent;
+            this.btnClear.Enabled = false;
+            this.btnClear.FlatAppearance.BorderSize = 0;
+            this.btnClear.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnClear.Image = global::eduRobot.Properties.Resources.Clear;
+            this.btnClear.Location = new System.Drawing.Point(511, 77);
+            this.btnClear.Margin = new System.Windows.Forms.Padding(2);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(56, 42);
+            this.btnClear.TabIndex = 124;
+            this.btnClear.UseVisualStyleBackColor = false;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
-            // label3
+            // btnPlay
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
-            this.label3.Location = new System.Drawing.Point(387, 280);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(98, 16);
-            this.label3.TabIndex = 194;
-            this.label3.Text = "Function: Fx1";
+            this.btnPlay.BackColor = System.Drawing.Color.Transparent;
+            this.btnPlay.Enabled = false;
+            this.btnPlay.FlatAppearance.BorderSize = 0;
+            this.btnPlay.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnPlay.Image = global::eduRobot.Properties.Resources.Run;
+            this.btnPlay.Location = new System.Drawing.Point(391, 77);
+            this.btnPlay.Margin = new System.Windows.Forms.Padding(2);
+            this.btnPlay.Name = "btnPlay";
+            this.btnPlay.Size = new System.Drawing.Size(56, 42);
+            this.btnPlay.TabIndex = 123;
+            this.btnPlay.UseVisualStyleBackColor = false;
+            this.btnPlay.Click += new System.EventHandler(this.btnPlay_Click);
             // 
-            // label4
+            // pbHeader
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.MediumBlue;
-            this.label4.Location = new System.Drawing.Point(388, 385);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(98, 16);
-            this.label4.TabIndex = 195;
-            this.label4.Text = "Function: Fx2";
+            this.pbHeader.BackColor = System.Drawing.Color.Transparent;
+            this.pbHeader.Image = global::eduRobot.Properties.Resources.Logo;
+            this.pbHeader.Location = new System.Drawing.Point(109, 3);
+            this.pbHeader.Name = "pbHeader";
+            this.pbHeader.Size = new System.Drawing.Size(336, 69);
+            this.pbHeader.TabIndex = 122;
+            this.pbHeader.TabStop = false;
+            // 
+            // btnRank
+            // 
+            this.btnRank.BackColor = System.Drawing.Color.Transparent;
+            this.btnRank.FlatAppearance.BorderSize = 0;
+            this.btnRank.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnRank.Image = global::eduRobot.Properties.Resources.Ranking2;
+            this.btnRank.Location = new System.Drawing.Point(451, 11);
+            this.btnRank.Margin = new System.Windows.Forms.Padding(2);
+            this.btnRank.Name = "btnRank";
+            this.btnRank.Size = new System.Drawing.Size(56, 55);
+            this.btnRank.TabIndex = 118;
+            this.btnRank.UseVisualStyleBackColor = false;
+            this.btnRank.Click += new System.EventHandler(this.btnRank_Click);
+            // 
+            // lblPoint
+            // 
+            this.lblPoint.BackColor = System.Drawing.Color.Transparent;
+            this.lblPoint.Font = new System.Drawing.Font("Microsoft Sans Serif", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(163)));
+            this.lblPoint.Location = new System.Drawing.Point(295, 77);
+            this.lblPoint.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblPoint.Name = "lblPoint";
+            this.lblPoint.Size = new System.Drawing.Size(83, 42);
+            this.lblPoint.TabIndex = 121;
+            this.lblPoint.Text = "0";
+            this.lblPoint.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            // 
+            // btnStop
+            // 
+            this.btnStop.BackColor = System.Drawing.Color.Transparent;
+            this.btnStop.Enabled = false;
+            this.btnStop.FlatAppearance.BorderSize = 0;
+            this.btnStop.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.btnStop.Image = global::eduRobot.Properties.Resources.Stop;
+            this.btnStop.Location = new System.Drawing.Point(451, 77);
+            this.btnStop.Margin = new System.Windows.Forms.Padding(2);
+            this.btnStop.Name = "btnStop";
+            this.btnStop.Size = new System.Drawing.Size(56, 42);
+            this.btnStop.TabIndex = 115;
+            this.btnStop.UseVisualStyleBackColor = false;
+            this.btnStop.Click += new System.EventHandler(this.btnStop_Click);
+            // 
+            // pbUp
+            // 
+            this.pbUp.BackColor = System.Drawing.Color.Transparent;
+            this.pbUp.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbUp.Image = global::eduRobot.Properties.Resources.GoUp;
+            this.pbUp.Location = new System.Drawing.Point(26, 77);
+            this.pbUp.Margin = new System.Windows.Forms.Padding(2);
+            this.pbUp.Name = "pbUp";
+            this.pbUp.Size = new System.Drawing.Size(43, 42);
+            this.pbUp.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbUp.TabIndex = 109;
+            this.pbUp.TabStop = false;
+            // 
+            // pbF2
+            // 
+            this.pbF2.BackColor = System.Drawing.Color.Transparent;
+            this.pbF2.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbF2.Image = global::eduRobot.Properties.Resources.Function2;
+            this.pbF2.Location = new System.Drawing.Point(239, 77);
+            this.pbF2.Margin = new System.Windows.Forms.Padding(2);
+            this.pbF2.Name = "pbF2";
+            this.pbF2.Size = new System.Drawing.Size(43, 42);
+            this.pbF2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbF2.TabIndex = 120;
+            this.pbF2.TabStop = false;
+            // 
+            // pbLeft
+            // 
+            this.pbLeft.BackColor = System.Drawing.Color.Transparent;
+            this.pbLeft.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbLeft.Image = global::eduRobot.Properties.Resources.TurnLeft;
+            this.pbLeft.Location = new System.Drawing.Point(68, 77);
+            this.pbLeft.Margin = new System.Windows.Forms.Padding(2);
+            this.pbLeft.Name = "pbLeft";
+            this.pbLeft.Size = new System.Drawing.Size(43, 42);
+            this.pbLeft.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLeft.TabIndex = 110;
+            this.pbLeft.TabStop = false;
+            // 
+            // pbF1
+            // 
+            this.pbF1.BackColor = System.Drawing.Color.Transparent;
+            this.pbF1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbF1.Image = global::eduRobot.Properties.Resources.Function1;
+            this.pbF1.Location = new System.Drawing.Point(196, 77);
+            this.pbF1.Margin = new System.Windows.Forms.Padding(2);
+            this.pbF1.Name = "pbF1";
+            this.pbF1.Size = new System.Drawing.Size(43, 42);
+            this.pbF1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbF1.TabIndex = 113;
+            this.pbF1.TabStop = false;
+            // 
+            // pbRight
+            // 
+            this.pbRight.BackColor = System.Drawing.Color.Transparent;
+            this.pbRight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbRight.Image = global::eduRobot.Properties.Resources.TurnRight;
+            this.pbRight.Location = new System.Drawing.Point(111, 77);
+            this.pbRight.Margin = new System.Windows.Forms.Padding(2);
+            this.pbRight.Name = "pbRight";
+            this.pbRight.Size = new System.Drawing.Size(43, 42);
+            this.pbRight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbRight.TabIndex = 111;
+            this.pbRight.TabStop = false;
+            // 
+            // pbLight
+            // 
+            this.pbLight.BackColor = System.Drawing.Color.Transparent;
+            this.pbLight.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pbLight.Image = global::eduRobot.Properties.Resources.Light;
+            this.pbLight.Location = new System.Drawing.Point(154, 77);
+            this.pbLight.Margin = new System.Windows.Forms.Padding(2);
+            this.pbLight.Name = "pbLight";
+            this.pbLight.Size = new System.Drawing.Size(43, 42);
+            this.pbLight.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbLight.TabIndex = 112;
+            this.pbLight.TabStop = false;
             // 
             // frmMain
             // 
@@ -1582,21 +1587,15 @@
             this.Controls.Add(this.gGame12);
             this.Controls.Add(this.gGame11);
             this.Controls.Add(this.pHeader);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(601, 548);
             this.MinimumSize = new System.Drawing.Size(601, 548);
             this.Name = "frmMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "eduRobot - Learning Programming with Robot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.frmMain_FormClosing);
             this.Load += new System.EventHandler(this.frmMain_Load);
-            this.pHeader.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbUp)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbF2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbF1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbRight)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pbLight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.f2Game8)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.f2Game7)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.f2Game6)).EndInit();
@@ -1689,6 +1688,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gGame13)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gGame12)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gGame11)).EndInit();
+            this.pHeader.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbHeader)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbUp)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbF2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLeft)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbF1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbRight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbLight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1704,7 +1712,6 @@
         private System.Windows.Forms.PictureBox pbUp;
         private System.Windows.Forms.PictureBox pbF2;
         private System.Windows.Forms.PictureBox pbLeft;
-        private System.Windows.Forms.Button btnHelp;
         private System.Windows.Forms.PictureBox pbF1;
         private System.Windows.Forms.PictureBox pbRight;
         private System.Windows.Forms.PictureBox pbLight;
@@ -1810,6 +1817,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 
