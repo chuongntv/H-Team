@@ -5,11 +5,9 @@ Player uses six commands in eduRobot to complete mission per level
 
 # Do
 - Design User Graphic Interface
-- checkStatusOfRobot method
-- checkGoStraight method
-- goStraight method
-- turnLeft method
-- turnRight method
+- Player Information
+- Player Game with more MAP, more challenge 
+- Ranking
 
 # Library
 - None
