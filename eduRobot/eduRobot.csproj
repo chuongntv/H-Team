@@ -33,6 +33,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>1438419353_search.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="SQLite.Designer">
       <HintPath>..\..\..\..\..\..\..\Program Files\System.Data.SQLite\2012\bin\SQLite.Designer.dll</HintPath>
@@ -164,6 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\1438428975_search.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="1438419353_search.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

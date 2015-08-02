@@ -992,7 +992,7 @@ namespace eduRobot
                     isStop = false;
                     return;
                 }
-                Thread.Sleep(300);
+                Thread.Sleep(250);
             }
             if (numberOfLight == numberOfLightIsOn)
             {
