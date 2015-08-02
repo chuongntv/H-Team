@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
-using System.Data;
 using System.Data.OleDb;
 namespace eduRobot
 {
@@ -58,6 +57,7 @@ namespace eduRobot
         #endregion
 
         #region Methods
+        /*Kiem tra Chieu Huong Cua Robot va Ngay tai vi tri cua Robot dang la gi? (Blank, CanGo, Light On or Off) */
         private int checkStatusOfRobot(int xRobot, int yRobot)
         {
             if (arrStatusMap[xRobot, yRobot] == MAP_CANGO)
@@ -95,6 +95,7 @@ namespace eduRobot
             }
             return 0;
         }
+        /*Kiem tra co the duoc Di Thang hay khong?*/
         private void checkGoStraight()
         {
             if (arrMap[xRobot, yRobot] == MAP_CANGO || arrMap[xRobot, yRobot] == MAP_ROBOT_UP)
@@ -109,6 +110,7 @@ namespace eduRobot
                     arrStatusMap[xRobot, yRobot] = MAP_LIGHT_ON;
             }
         }
+        /*Di Thang*/
         private void goStraight()
         {
 
@@ -147,6 +149,7 @@ namespace eduRobot
                 }
             }
         }
+        /*Quay Sang Trai*/
         private void turnLeft()
         {
             if (trendOfRobot == ROBOT_UP)
@@ -190,6 +193,7 @@ namespace eduRobot
                 trendOfRobot = ROBOT_UP;
             }
         }
+        /*Quay Sang Phai*/
         private void turnRight()
         {
             if (trendOfRobot == ROBOT_UP)
@@ -233,6 +237,7 @@ namespace eduRobot
                 trendOfRobot = ROBOT_DOWN;
             }
         }
+        /*Reset tat ca gia tri cua ArrCmd  va Status ve mac dinh theo level*/
         private void resetAll()
         {
             for (int i = 0; i < 13; i++)
@@ -246,6 +251,7 @@ namespace eduRobot
                 for (int j = 0; j < 10; j++)
                     arrStatusMap[i, j] = arrMap[i, j];
         }
+        /*Load Level va luu Log level truoc do */
         private void loadLevel(int level)
         {
             if (File.Exists("Map\\" + level + ".map"))
@@ -279,6 +285,7 @@ namespace eduRobot
                 }
 
                 resetAll();
+                /*Reset hinh anh trong cac command ve null*/
                 var pics = this.Controls
                                         .OfType<PictureBox>().OrderBy(b => b.Name)
                                         .Where(b => b.Name.Substring(0, 5).Equals("mGame"));
@@ -381,6 +388,7 @@ namespace eduRobot
                 MessageBox.Show("Congratulation! You are finish game with " + lblPoint.Text, " command(s).\nPlease visit homepage to get more map.", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        /*Xu li trang thai cua den ngay tai vi tri cua robot*/
         private void processLight()
         {
 
@@ -429,6 +437,7 @@ namespace eduRobot
                 }
             }
         }
+        /* Goi ham F1 */
         private void callF1()
         {
             for (int i = 1; i <= 8; i++)
@@ -490,6 +499,7 @@ namespace eduRobot
 
 
         }
+        /* Goi Ham F2 */
         private void callF2()
         {
             for (int i = 1; i <= 8; i++)
@@ -548,6 +558,8 @@ namespace eduRobot
                 Thread.Sleep(300);
             }
         }
+
+        /*Cap nhat lai ban do sau moi buoc di*/
         private void updateMap()
         {
             int i = 1, j = 1;
